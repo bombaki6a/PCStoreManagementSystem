@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PCStoreManagementSystem.Resources.Icons.Icons">
+
+    <x:String x:Key="Home">&#xf015;</x:String>
+    <x:String x:Key="Edit">&#xf044;</x:String>
+    <x:String x:Key="Cancel">&#xf05e;</x:String>
+    <x:String x:Key="Accept">&#xf00c;</x:String>
+    <x:String x:Key="AddProduct">&#xf217;</x:String>
+    <x:String x:Key="History">&#xf1da;</x:String>
+    <x:String x:Key="List">&#xf0ca;</x:String>
+    <x:String x:Key="Users">&#xf0c0;</x:String>
+    <x:String x:Key="LogOut">&#xf842;</x:String>
+    <x:String x:Key="Add">&#xf067;</x:String>
+    <x:String x:Key="Remove">&#xf00d;</x:String>
+    <x:String x:Key="Return">&#xf810;</x:String>
+    <x:String x:Key="Pencil">&#xf040;</x:String>
+    <x:String x:Key="User">&#xf007;</x:String>
+    <x:String x:Key="Quantity">&#xf1b3;</x:String>
+    <x:String x:Key="Info">&#xf7fc;</x:String>
+
+</ResourceDictionary>

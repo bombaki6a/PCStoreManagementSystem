@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PCStoreManagementSystem.Views.ControlPanel.UserListView"
+             xmlns:model="clr-namespace:PCStoreManagementSystem.Models.Database.Tables"
+             xmlns:viewmodel="clr-namespace:PCStoreManagementSystem.ViewModels.ControlPanel"
+             x:DataType="viewmodel:UserListViewModel">
+
+    <ScrollView>
+        <Grid RowDefinitions="auto, auto, auto, auto"
+              ColumnDefinitions="*, *, *"
+              ColumnSpacing="20"
+              RowSpacing="20">
+            
+            <!-- Title -->
+            <Label Grid.Row="0"
+                   Grid.ColumnSpan="3"
+                   Text="Users"
+                   FontSize="Header"
+                   Margin="0, 10, 0, 0"
+                   HorizontalOptions="Center" />
+            
+            <!-- Search Bar -->
+            <Border Grid.Row="1"
+                    Grid.Column="0"
+                    Margin="30, 0, 0, 0">
+                
+                <SearchBar FontSize="Medium"
+                           Placeholder="Search..."
+                           Text="{Binding SearchText}"
+                           SearchCommand="{Binding SearchCommand}" />
+                
+            </Border>
+            
+            <!-- User List -->
+            <Border Grid.Row="2"
+                    Grid.ColumnSpan="3"
+                    Margin="30, 0, 30, 0">
+
+                <ListView HasUnevenRows="True"
+                          MinimumHeightRequest="485"
+                          MaximumHeightRequest="485"
+                          ItemsSource="{Binding Users}"
+                          SelectedItem="{Binding SelectedUser}"
+                          BackgroundColor="Transparent"
+                          VerticalScrollBarVisibility="Never"
+                          HorizontalScrollBarVisibility="Never">
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="{x:Type model:User}">
+                            <ViewCell>
+                                <HorizontalStackLayout Spacing="20"
+                                                       HeightRequest="50">
+
+                                    <Label Text="{Binding Id, StringFormat='№: {0}'}"
+                                           FontSize="Medium"
+                                           VerticalOptions="Center" />
+
+                                    <Label Text="{Binding FullName, StringFormat='Name: {0}'}"
+                                            FontSize="Medium"
+                                            VerticalOptions="Center" />
+
+                                </HorizontalStackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+
+                </ListView>
+
+            </Border>
+
+            <!-- Control Buttons -->
+            <Button Grid.Row="3"
+                    Grid.Column="0"
+                    Margin="20, 0, 0, 20"
+                    Text="{Binding Source={StaticResource Edit}, StringFormat='{0} Edit User'}"
+                    Command="{Binding EditUserCommand}" />
+            <Button Grid.Row="3"
+                    Grid.Column="1"
+                    Margin="0, 0, 0, 20"
+                    Text="{Binding Source={StaticResource Remove}, StringFormat='{0} Remove User'}"
+                    Command="{Binding RemoveUserCommand}" />
+            <Button Grid.Row="3"
+                    Grid.Column="2"
+                    Margin="0, 0, 20, 20"
+                    Text="{Binding Source={StaticResource Add}, StringFormat='{0} Add User'}"
+                    Command="{Binding AddUserCommand}" />
+
+        </Grid>
+    </ScrollView>
+    
+</ContentPage>

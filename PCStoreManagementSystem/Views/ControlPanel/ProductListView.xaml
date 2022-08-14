@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PCStoreManagementSystem.Views.ControlPanel.ProductListView"
+             xmlns:model="clr-namespace:PCStoreManagementSystem.Models.Database.Tables"
+             xmlns:viewmodel="clr-namespace:PCStoreManagementSystem.ViewModels.ControlPanel"
+             x:DataType="viewmodel:ProductListViewModel">
+
+    <ScrollView>
+        <Grid RowDefinitions="auto, auto, auto, auto"
+              ColumnDefinitions="*, *, *"
+              ColumnSpacing="20"
+              RowSpacing="20">
+
+            <!-- Title -->
+            <Label Grid.Row="0"
+                   Grid.ColumnSpan="3"
+                   Text="Products"
+                   FontSize="Header"
+                   Margin="0, 10, 0, 0"
+                   HorizontalOptions="Center" />
+
+            <!-- Search Bar -->
+            <Border Grid.Row="1"
+                    Grid.Column="0"
+                    Margin="30, 0, 0, 0">
+                
+                <SearchBar FontSize="Medium"
+                           Placeholder="Search..."
+                           Text="{Binding SearchText}"
+                           SearchCommand="{Binding SearchCommand}" />
+                
+            </Border>
+
+            <!-- Product List -->
+            <Border Grid.Row="2"
+                    Grid.ColumnSpan="3"
+                    Margin="30, 0, 30, 0">
+
+                <ListView HasUnevenRows="True"
+                          MinimumHeightRequest="485"
+                          MaximumHeightRequest="485"
+                          BackgroundColor="Transparent"
+                          ItemsSource="{Binding Products}"
+                          SelectedItem="{Binding SelectedProduct}"
+                          VerticalScrollBarVisibility="Never"
+                          HorizontalScrollBarVisibility="Never">
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="{x:Type model:Product}">
+                            <ViewCell>
+                                <Grid ColumnDefinitions="*, *"
+                                      HeightRequest="50">
+
+                                    <HorizontalStackLayout Grid.Column="0"
+                                                           Spacing="20"
+                                                           HorizontalOptions="Start"
+                                                           VerticalOptions="Center">
+                                    
+                                        <Label FontSize="Medium"
+                                               Text="{Binding Id, StringFormat='№: {0}'}" />
+                                        <Label FontSize="Medium"
+                                               Text="{Binding Name, StringFormat='Name: {0}'}" />
+                                        <Label FontSize="Medium"
+                                               Text="{Binding Model, StringFormat='Model: {0}'}" />
+                                    
+                                    </HorizontalStackLayout>
+
+                                    <Label Grid.Column="1"
+                                           FontSize="Medium"
+                                           Margin="0, 0, 5, 0"
+                                           HorizontalOptions="End"
+                                           VerticalOptions="Center"
+                                           Text="{Binding Price, StringFormat='Price: ${0}'}" />
+                                
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+
+                </ListView>
+                
+            </Border>
+
+            <!-- Control Buttons -->
+            <Button Grid.Row="3"
+                    Grid.Column="0"
+                    Margin="20, 0, 0, 20"
+                    Command="{Binding EditProductCommand}"
+                    Text="{Binding Source={StaticResource Edit}, StringFormat='{0} Edit Product'}" />
+            <Button Grid.Row="3"
+                    Grid.Column="1"
+                    Margin="0, 0, 0, 20"
+                    Command="{Binding RemoveProductCommand}"
+                    Text="{Binding Source={StaticResource Remove}, StringFormat='{0} Remove Product'}" />
+            <Button Grid.Row="3"
+                    Grid.Column="2"
+                    Margin="0, 0, 20, 20"
+                    Command="{Binding AddProductCommand}"
+                    Text="{Binding Source={StaticResource Add}, StringFormat='{0} Add Product'}" />
+
+        </Grid>
+    </ScrollView>
+
+</ContentPage>

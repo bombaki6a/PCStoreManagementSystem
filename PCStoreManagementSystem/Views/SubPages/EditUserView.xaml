@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PCStoreManagementSystem.Views.SubPages.EditUserView"
+             xmlns:viewmodel="clr-namespace:PCStoreManagementSystem.ViewModels.SubPages"
+             x:DataType="viewmodel:EditUserViewModel">
+
+    <!-- Remove Back Button Behavior -->
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsVisible="False"
+                            IsEnabled="False" />
+    </Shell.BackButtonBehavior>
+
+    <ScrollView>
+        <Grid RowDefinitions="auto, auto, auto"
+              ColumnDefinitions="*, *"
+              ColumnSpacing="20"
+              RowSpacing="20">
+
+            <!-- Title -->
+            <Label Grid.Row="0"
+                   Grid.ColumnSpan="2"
+                   Text="Edit User"
+                   FontSize="Header"
+                   Margin="0, 10, 0, 0"
+                   HorizontalOptions="Center" />
+
+            <!-- Entries -->
+            <VerticalStackLayout Grid.Row="1"
+                                 Grid.ColumnSpan="2"
+                                 Spacing="10"
+                                 Margin="100, 0, 100, 0">
+
+                <Border>
+                    <Entry Placeholder="E-Mail"
+                           Text="{Binding User.Email}" />
+                </Border>
+                <Border>
+                    <Entry Placeholder="Password"
+                           MaxLength="24"
+                           Text="{Binding User.Password}" />
+                </Border>
+                <Border>
+                    <Entry Placeholder="Full Name"
+                           Text="{Binding User.FullName}" />
+                </Border>
+                <Border>
+                    <Entry Placeholder="Phone Number"
+                           MaxLength="10"
+                           Text="{Binding User.PhoneNumber}" />
+                </Border>
+                <Border>
+                    <Entry Placeholder="Address"
+                           Text="{Binding User.Address}" />
+                </Border>
+
+            </VerticalStackLayout>
+
+            <!-- Control Buttons -->
+            <Button Grid.Row="2"
+                    Grid.Column="0"
+                    Margin="100, 0, 0, 0"
+                    Text="{Binding Source={StaticResource Return}, StringFormat='{0} Back'}"
+                    Command="{Binding BackCommand}" />
+            <Button Grid.Row="2"
+                    Grid.Column="1"
+                    Margin="0, 0, 100, 0"
+                    Text="{Binding Source={StaticResource Pencil}, StringFormat='{0} Edit'}"
+                    Command="{Binding EditCommand}" />
+
+        </Grid>
+    </ScrollView>
+
+</ContentPage>

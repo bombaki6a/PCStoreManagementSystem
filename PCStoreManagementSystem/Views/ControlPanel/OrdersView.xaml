@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:PCStoreManagementSystem.Models.Database.Tables"
+             xmlns:viewmodel="clr-namespace:PCStoreManagementSystem.ViewModels.ControlPanel"
+             x:Class="PCStoreManagementSystem.Views.ControlPanel.OrdersView"
+             x:DataType="viewmodel:OrdersViewModel">
+
+    <ScrollView>
+        <Grid RowDefinitions="auto, auto, auto, auto"
+              ColumnDefinitions="*, *, *, *"
+              ColumnSpacing="20"
+              RowSpacing="20">
+
+            <!-- Title -->
+            <Label Grid.Row="0"
+                   Grid.ColumnSpan="4"
+                   FontSize="Header"
+                   Margin="0, 10, 0, 0"
+                   HorizontalOptions="Center"
+                   Text="Orders" />
+
+            <!-- Search Bar -->
+            <Border Grid.Row="1"
+                    Grid.Column="0"
+                    Margin="30, 0, 0, 0">
+                
+                <SearchBar FontSize="Medium"
+                           Placeholder="Search..."
+                           Text="{Binding SearchText}"
+                           SearchCommand="{Binding SearchCommand}"/>
+                
+            </Border>
+
+            <!-- Orders List -->
+            <Border Grid.Row="2"
+                    Grid.ColumnSpan="4"
+                    Margin="30, 0, 30, 0">
+
+                <ListView HasUnevenRows="True"
+                          MinimumHeightRequest="485"
+                          MaximumHeightRequest="485"
+                          ItemsSource="{Binding Orders}"
+                          SelectedItem="{Binding SelectedOrder}"
+                          BackgroundColor="Transparent"
+                          VerticalScrollBarVisibility="Never"
+                          HorizontalScrollBarVisibility="Never">
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="{x:Type model:Order}">
+                            <ViewCell>
+                                <Grid ColumnDefinitions="*, *"
+                                      ColumnSpacing="20"
+                                      HeightRequest="50">
+
+                                    <HorizontalStackLayout Grid.Column="0"
+                                                           Spacing="20"
+                                                           HorizontalOptions="Start"
+                                                           VerticalOptions="Center">
+
+                                        <Label FontSize="Medium"
+                                               Text="{Binding Id, StringFormat='№: {0}'}" />
+
+                                        <Label FontSize="Medium"
+                                               Text="{Binding Product.Name, StringFormat='Product: {0}'}" />
+
+                                        <Label FontSize="Medium"
+                                               Text="{Binding User.FullName, StringFormat='User: {0}'}" />
+
+                                        <Label FontSize="Medium"
+                                               Text="{Binding Quantity, StringFormat='Quantity: {0}'}" />
+
+                                    </HorizontalStackLayout>
+
+                                    <Label Grid.Column="1"
+                                           FontSize="Medium"
+                                           Margin="0, 0, 5, 0"
+                                           HorizontalOptions="End"
+                                           VerticalOptions="Center"
+                                           Text="{Binding Date, StringFormat='Date: {0:dd/MM/yyyy}'}" />
+
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+
+                </ListView>
+                
+            </Border>
+
+            <!-- Control Buttons -->
+            <Button Grid.Row="3"
+                    Grid.Column="0"
+                    Margin="20, 0, 0, 20"
+                    Command="{Binding AddOrderCommand}"
+                    Text="{Binding Source={StaticResource Add}, StringFormat='{0} Add Order'}" />
+            <Button Grid.Row="3"
+                    Grid.Column="1"
+                    Margin="0, 0, 0, 20"
+                    Command="{Binding EditOrderCommand}"
+                    Text="{Binding Source={StaticResource Edit}, StringFormat='{0} Edit Order'}" />
+            <Button Grid.Row="3"
+                    Grid.Column="2"
+                    Margin="0, 0, 0, 20"
+                    Command="{Binding CancelOrAcceptOrderCommand}"
+                    CommandParameter="{x:Boolean false}"
+                    Text="{Binding Source={StaticResource Cancel}, StringFormat='{0} Cancel Order'}" />
+            <Button Grid.Row="3"
+                    Grid.Column="3"
+                    Margin="0, 0, 20, 20"
+                    Command="{Binding CancelOrAcceptOrderCommand}"
+                    CommandParameter="{x:Boolean true}"
+                    Text="{Binding Source={StaticResource Accept}, StringFormat='{0} Accept Order'}" />
+
+        </Grid>
+    </ScrollView>
+    
+</ContentPage>

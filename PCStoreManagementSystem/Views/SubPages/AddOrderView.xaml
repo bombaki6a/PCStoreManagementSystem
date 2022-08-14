@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:PCStoreManagementSystem.ViewModels.SubPages"
+             x:Class="PCStoreManagementSystem.Views.SubPages.AddOrderView"
+             x:DataType="viewmodel:AddOrderViewModel"
+             Shell.FlyoutBehavior="Disabled"
+             Shell.NavBarIsVisible="False">
+
+    <!-- Remove Back Button Behavior -->
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsVisible="False"
+                            IsEnabled="False" />
+    </Shell.BackButtonBehavior>
+
+    <ScrollView>
+        <Grid RowDefinitions="auto, auto, auto"
+              ColumnDefinitions="*, *"
+              HorizontalOptions="Center"
+              ColumnSpacing="20"
+              RowSpacing="20">
+
+            <!-- Title -->
+            <Label Grid.Row="0"
+                   Grid.ColumnSpan="2"
+                   Text="Add Order"
+                   FontSize="Header"
+                   Margin="0, 10, 0, 0"
+                   HorizontalOptions="Center" />
+
+            <!-- Pickers -->
+            <VerticalStackLayout Grid.Row="1"
+                                 Grid.ColumnSpan="2"
+                                 Spacing="10"
+                                 HorizontalOptions="Center">
+                
+                <!-- User -->
+                <HorizontalStackLayout Spacing="20">
+
+                    <Label FontSize="Medium"
+                           VerticalOptions="Center"
+                           Text="{Binding Source={StaticResource User}}" />
+
+                    <Border>
+                        <Picker FontSize="Medium"
+                                WidthRequest="300"
+                                ItemsSource="{Binding Users}"
+                                SelectedItem="{Binding SelectedUser}"
+                                ItemDisplayBinding="{Binding FullName}" />
+                    </Border>
+
+                    <Border>
+                        <SearchBar FontSize="Medium"
+                                   WidthRequest="300"
+                                   Placeholder="User filtering..."
+                                   Text="{Binding UserFiltering}"
+                                   SearchCommand="{Binding UserFilteringCommand}" />
+                    </Border>
+
+                </HorizontalStackLayout>
+                
+                <!-- Product -->
+                <HorizontalStackLayout Spacing="20">
+
+                    <Label FontSize="Medium"
+                           VerticalOptions="Center"
+                           Text="{Binding Source={StaticResource AddProduct}}" />
+
+                    <Border>
+                        <Picker FontSize="Medium"
+                                WidthRequest="300"
+                                ItemsSource="{Binding Products}"
+                                ItemDisplayBinding="{Binding Name}"
+                                SelectedItem="{Binding SelectedProduct}" />
+                    </Border>
+
+                    <Border>
+                        <SearchBar FontSize="Medium"
+                                   WidthRequest="300"
+                                   Placeholder="Product filtering..."
+                                   Text="{Binding ProductFiltering}"
+                                   SearchCommand="{Binding ProductFilteringCommand}" />
+                    </Border>
+
+                </HorizontalStackLayout>
+                
+                <!-- Prodcut Quantity -->
+                <HorizontalStackLayout Spacing="20">
+                    
+                    <Label FontSize="Medium"
+                           VerticalOptions="Center"
+                           Text="{Binding Source={StaticResource Quantity}}" />
+
+                    <Border>
+                        <Entry MaxLength="2"
+                               WidthRequest="95"
+                               Placeholder="Quantity"
+                               Text="{Binding Quantity}" />
+                    </Border>
+
+                </HorizontalStackLayout>
+
+            </VerticalStackLayout>
+
+            <!-- Buttons -->
+            <Button Grid.Row="2"
+                    Grid.Column="0"
+                    Margin="0, 0, 0, 20"
+                    Command="{Binding BackCommand}"
+                    Text="{Binding Source={StaticResource Return}, StringFormat='{0} Back'}" />
+            <Button Grid.Row="2"
+                    Grid.Column="1"
+                    Margin="0, 0, 0, 20"
+                    Command="{Binding AddCommand}"
+                    Text="{Binding Source={StaticResource Add}, StringFormat='{0} Add'}" />
+
+        </Grid>
+    </ScrollView>
+    
+</ContentPage>

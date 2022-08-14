@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:PCStoreManagementSystem.ViewModels"
+             x:Class="PCStoreManagementSystem.Views.LoginView"
+             x:DataType="viewmodel:LoginViewModel"
+             Shell.FlyoutBehavior="Disabled"
+             Shell.NavBarIsVisible="False">
+
+    <VerticalStackLayout Spacing="20"
+                         VerticalOptions="Center"
+                         HorizontalOptions="Center">
+
+        <!-- Logo -->
+        <Image Source="logo.png"
+                WidthRequest="145"
+                HeightRequest="145"
+                HorizontalOptions="Center" />
+
+        <!-- Login Form -->
+        <VerticalStackLayout Spacing="10">
+            <Border>
+                <Entry x:Name="Username"
+                       Text="{Binding Username}"
+                       MaxLength="29"
+                       Placeholder="Username" />
+            </Border>
+            <Border>
+                <Entry x:Name="Password"
+                       Text="{Binding Password}"
+                       IsPassword="True"
+                       MaxLength="26"
+                       Placeholder="Password" />
+            </Border>
+            
+        </VerticalStackLayout>
+        
+        <!-- Navigation Buttons -->
+        <Button Text="Log In"
+                MinimumWidthRequest="240"
+                MaximumWidthRequest="240"
+                HorizontalOptions="Center"
+                Command="{Binding LoginCommand}" />
+        
+    </VerticalStackLayout>
+
+</ContentPage>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell x:Name="shell"
+       x:Class="PCStoreManagementSystem.AppShell"
+       xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:shell="clr-namespace:PCStoreManagementSystem"
+       xmlns:local="clr-namespace:PCStoreManagementSystem.Views"
+       xmlns:model="clr-namespace:PCStoreManagementSystem.ViewModels"
+       xmlns:control_panel="clr-namespace:PCStoreManagementSystem.Views.ControlPanel"
+       x:DataType="model:AppShellViewModel"
+       Shell.FlyoutBehavior="Flyout"
+       Shell.TabBarIsVisible="False"
+       Shell.NavBarIsVisible="False">
+
+    <!-- Flyout Header Template -->
+    <Shell.FlyoutHeaderTemplate>
+        <DataTemplate>
+            <VerticalStackLayout HeightRequest="100">
+                <Image Source="logo.png"
+                       WidthRequest="100"
+                       HorizontalOptions="Center" />
+            </VerticalStackLayout>
+        </DataTemplate>
+    </Shell.FlyoutHeaderTemplate>
+
+    <!-- Flyout Items Template -->
+    <Shell.ItemTemplate>
+        <DataTemplate x:DataType="{x:Type shell:AppShell}">
+            <VerticalStackLayout>
+                <Label Text="{Binding Title}"
+                       Margin="15"
+                       FontSize="Medium"
+                       VerticalTextAlignment="Center" />
+            </VerticalStackLayout>
+        </DataTemplate>
+    </Shell.ItemTemplate>
+
+    <!-- Login View -->
+    <ShellContent Route="LoginView"
+                  FlyoutItemIsVisible="False"
+                  ContentTemplate="{DataTemplate local:LoginView}" />
+
+    <!-- Flyout Items -->
+    <FlyoutItem Title="{Binding Source={StaticResource Home}, StringFormat='{0}  Home'}"
+                Route="OrdersView">
+        <ShellContent ContentTemplate="{DataTemplate control_panel:OrdersView}" />
+    </FlyoutItem>
+    <FlyoutItem Title="{Binding Source={StaticResource History}, StringFormat='{0}  Order History'}"
+                Route="OrderHistiryView">
+        <ShellContent ContentTemplate="{DataTemplate control_panel:OrderHistoryView}" />
+    </FlyoutItem>
+    <FlyoutItem Title="{Binding Source={StaticResource List}, StringFormat='{0}  Product List'}"
+                Route="ProductListView">
+        <ShellContent ContentTemplate="{DataTemplate control_panel:ProductListView}" />
+    </FlyoutItem>
+    <FlyoutItem Title="{Binding Source={StaticResource Users}, StringFormat='{0}  User List'}"
+                Route="UserListView">
+        <ShellContent ContentTemplate="{DataTemplate control_panel:UserListView}" />
+    </FlyoutItem>
+
+    <!-- Flyout Footer -->
+    <Shell.FlyoutFooter>
+        <Button Margin="20, 0, 20, 20"
+                Command="{Binding LogOutCommand}"
+                Text="{Binding Source={StaticResource LogOut}, StringFormat='{0} Log Out'}" />
+    </Shell.FlyoutFooter>
+
+</Shell>
